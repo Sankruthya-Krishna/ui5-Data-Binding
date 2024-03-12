@@ -1,12 +1,16 @@
 {
-    "name": "ui5.databinding",
+    "name": "data-binding-tutorial",
+    "private": true,
     "version": "1.0.0",
-    "description": "The UI5 data binding application",
+    "author": "SAP SE",
+    "description": "UI5 Demo App - Data Binding Tutorial",
     "scripts": {
-        "start": "ui5 serve -o index.html"
+      "start": "ui5 serve -o index.html"
     },
-    "dependencies": {
-        "-": "^0.0.1",
-        "@ui5/cli": "^3.9.1"
-    }
-}
+    "devDependencies": {
+      "@ui5/cli": "^3"
+    },
+    "main": "index.js",
+    "license": "ISC"
+  }
+  
