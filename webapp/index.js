@@ -12,7 +12,13 @@ sap.ui.require([
 		var oModel = new JSONModel({
 			firstName: "Harry",
 			lastName: "Hawk",
-			enabled: true
+			enabled: true,
+			address: {
+				street: "Dietmar-Hopp-Allee 16",
+				city: "Walldorf",
+				zip: "69190",
+				country: "Germany"
+			}
 		});
 
 		// Assign the model object to the SAPUI5 core
@@ -27,8 +33,8 @@ sap.ui.require([
 		// @see https://sdk.openui5.org/topic/ec753bc539d748f689e3ac814e129563
 		var oResourceModel = new ResourceModel({
 			bundleName: "sap.ui.demo.db.i18n.i18n",
-			fallbackLocale: "",
-			supportedLocales: [""]
+			supportedLocales: ["", "de"],
+			fallbackLocale: ""
 		});
 
 		// Assign the model object to the SAPUI5 core using the name "i18n"
