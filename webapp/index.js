@@ -1,14 +1,18 @@
 sap.ui.require([
 	"sap/ui/core/Core",
+	"sap/ui/core/Messaging",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/mvc/XMLView",
 	"sap/ui/model/resource/ResourceModel"
-], function (Core, JSONModel, XMLView, ResourceModel) {
+], function (Core, Messaging, JSONModel, XMLView, ResourceModel) {
 	"use strict";
 
 	// Chain an anonymous function to the SAPUI5 'ready' Promise
 	Core.ready().then(function () {
-		// Create a JSON model from an object literal
+		var oProductModel = new JSONModel();
+		oProductModel.loadData("./model/Products.json");
+		sap.ui.getCore().setModel(oProductModel, "products");
+
 		var oModel = new JSONModel({
 			firstName: "Harry",
 			lastName: "Hawk",
@@ -26,29 +30,21 @@ sap.ui.require([
 		// Assign the model object to the SAPUI5 core
 		sap.ui.getCore().setModel(oModel);
 
-		// Create a resource bundle for language specific texts
-		// configured supportedLocales represent the i18n files present:
-		// * "" - i18n/i18n.properties
-		// configured fallbackLocale should represent one of these files
-		// * "" - according to the fallback chain the root bundle is the last fallback.
-		//   Configuring it explicitly avoids side effects when additional resource files are added.
-		// @see https://sdk.openui5.org/topic/ec753bc539d748f689e3ac814e129563
 		var oResourceModel = new ResourceModel({
 			bundleName: "sap.ui.demo.db.i18n.i18n",
-			supportedLocales: ["", "de"],
-			fallbackLocale: ""
+			fallbackLocale: "",
+			supportedLocales: ["", "de"]
 		});
 
-		// Assign the model object to the SAPUI5 core using the name "i18n"
 		sap.ui.getCore().setModel(oResourceModel, "i18n");
 
 		// Display the XML view called "App"
-		var oView =new XMLView({
+		var oView = new XMLView({
 			viewName: "sap.ui.demo.db.view.App"
 		});
-		// Register the view with the message manager
-		sap.ui.getCore().getMessageManager().registerObject(oView, true);
 
+		// Register the view with the message manager
+		Messaging.registerObject(oView, true);
 
 		// Insert the view into the DOM
 		oView.placeAt("content");
